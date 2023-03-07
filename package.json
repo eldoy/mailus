@@ -1,0 +1,19 @@
+{
+  "name": "mailus",
+  "version": "0.1.0",
+  "description": "Utility for mass sending of emails",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eldoy/mailus.git"
+  },
+  "author": "Vidar Eldøy <vidar@eldoy.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eldoy/mailus/issues"
+  },
+  "homepage": "https://github.com/eldoy/mailus#readme"
+}
