@@ -2,6 +2,9 @@
   "name": "mailus",
   "version": "0.1.0",
   "description": "Utility for mass sending of emails",
+  "bin": {
+    "waveorb": "bin/mailus.js"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/eldoy/mailus/issues"
   },
-  "homepage": "https://github.com/eldoy/mailus#readme"
+  "homepage": "https://github.com/eldoy/mailus#readme",
+  "dependencies": {
+    "extras": "^0.11.0",
+    "waveorb-mailer": "^0.2.1"
+  }
 }

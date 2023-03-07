@@ -17,21 +17,21 @@ As an example, we will create a campaign called `hello`.
 Create a directory called `campaigns/hello` and add two files in it:
 
 ```
-campaigns/hello/data.json
+campaigns/hello/list.json
 campaigns/hello/email.md
 ```
 
-The `data.json` file will contain the data for your email. The `email.md` file is the email that you are going to send.
+The `list.json` file will contain a list of data for your email. The `email.md` file is the email that you are going to send.
 
-#### Add your data
+#### Add your list data
 
-The `data.json` file has to contain a field called `recipient` and can haven any other data your want to use in your email:
+The `list.json` file has to be an array of items containing a field named `to` and can have any other data your want to use in your email:
 
 ```json
 [
   {
     "name": "Vidar",
-    "recipient": "Vidar Eldøy <vidar@eldoy.com>"
+    "to": "Vidar Eldøy <vidar@eldoy.com>"
   }
 ]
 ```
