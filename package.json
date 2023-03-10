@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Utility for mass sending of emails",
   "bin": {
-    "waveorb": "bin/mailus.js"
+    "mailus": "bin/mailus.js"
   },
   "main": "index.js",
   "scripts": {
