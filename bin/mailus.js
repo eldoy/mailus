@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const COMMANDS = ['test', 'send']
-const command = process.argv[3]
+const command = process.argv[2]
 
 function usage() {
   console.log(
@@ -18,7 +18,7 @@ if (!COMMANDS.includes(command)) {
   process.exit()
 }
 
-const campaign = process.argv[4]
+const campaign = process.argv[3]
 
 const mailus = require('../index.js')
 

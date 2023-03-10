@@ -14,31 +14,44 @@ npm i -g mailus
 
 As an example, we will create a campaign called `hello`.
 
-Create a directory called `campaigns/hello` and add two files in it:
+Create a directory called `campaigns/hello` and add three files in it:
 
 ```
-campaigns/hello/list.json
-campaigns/hello/email.md
+campaigns/hello/contacts.json
+campaigns/hello/email.json
+campaigns/hello/message.md
 ```
 
-The `list.json` file will contain a list of data for your email. The `email.md` file is the email that you are going to send.
+- The `contacts.json` file contains the contacts your will send your email to.
+- The `email.json` file contains from and subject fields.
+- The `message.md` file is the content of the email that you are going to send.
 
-#### Add your list data
+#### Add your contacts
 
-The `list.json` file has to be an array of items containing a field named `to` and can have any other data your want to use in your email:
+The `contacts.json` file has to be an array of items containing a field named `email` and can have any other data your want to use in your email:
 
 ```json
 [
   {
     "name": "Vidar",
-    "to": "Vidar Eldøy <vidar@eldoy.com>"
+    "email": "Vidar Eldøy <vidar@eldoy.com>"
   }
 ]
 ```
 
-#### Add your email
+### Desribe your email
 
-The email is written in markdown, but also supports HTML and Mustache with front matter data:
+In the `email.json` file add from and subject:
+```json
+{
+  "from": "Vidar Eldøy <vidar@eldoy.com>",
+  "subject": "Hey, what's going on?"
+}
+```
+
+#### Write your message
+
+The message in `message.md` is written in markdown, but also supports HTML and Mustache with front matter data:
 
 ```md
 # Hello {{name}}
@@ -55,13 +68,32 @@ In your root directory, add a file called `mailus.json`. It is your configuratio
 
 ```json
 {
-  "test": "vidar@eldoy.com"
+  "from": "Vidar Eldøy <vidar@eldoy.com>",
+  "server": {
+    "host": "smtp.ethereal.email",
+    "port": 587,
+    "auth": {
+      "user": "nicola.breitenberg58@ethereal.email",
+      "pass": "eUpHSnV96EM8uRbJ9S"
+    }
+  }
 }
 ```
 
-The `test` field is the address of where you will receive your test emails.
-
 ### Test your email
+
+To add a test configuration, create a file called `mailus.test.json`. It will be loaded instead of the normal config file if you run the `test` command.
+
+Also add a test contacts file in `campaigns/hello/contacts.test.json`:
+
+```json
+[
+  {
+    "name": "Vidar",
+    "email": "Vidar Eldøy <vidar@eldoy.com>"
+  }
+]
+```
 
 To test your email write this in terminal:
 
@@ -69,12 +101,12 @@ To test your email write this in terminal:
 mailus test hello
 ```
 
-It will send an email to the test address in your config file so you can see how it looks.
+It will send an email to your test contacts using the config from your test config file.
 
 
 ### Send your emails
 
-To start sending mails to all of your recipients, write this in terminal:
+To start sending mails to all of your contacts, write this in terminal:
 
 ```
 mailus send hello
