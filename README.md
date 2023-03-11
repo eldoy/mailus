@@ -28,11 +28,6 @@ mailus
     └── test.json
 ```
 
-- The `campaigns/hello.json` file contains subject, from and message reference.
-- The `lists/test.json` file contains a list of contacts your will send your email to.
-- The `messages/hello.md` file is the content of the email that you are going to send.
-- The `servers/test.json` file contains the server you are sending emails through.
-
 ### Construct your email
 
 In the `campaigns/hello.json` file add from, subject and message reference:
@@ -94,10 +89,10 @@ The server info can be any outgoing SMTP server. Here we use a test server that 
 To start sending mails to all of your contacts in your list, write this in terminal:
 
 ```
-mailus test hello test
+mailus hello test test
 ```
 
-This means "send the test email to the hello list through the test server":
+This means "send the hello campaign to the test list through the test server":
 
 ```
 mailus <campaign> <list> <server>
