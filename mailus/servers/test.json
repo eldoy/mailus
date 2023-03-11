@@ -1,0 +1,8 @@
+{
+  "host": "smtp.ethereal.email",
+  "port": 587,
+  "auth": {
+    "user": "nicola.breitenberg58@ethereal.email",
+    "pass": "eUpHSnV96EM8uRbJ9S"
+  }
+}

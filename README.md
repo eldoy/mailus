@@ -14,21 +14,41 @@ npm i -g mailus
 
 As an example, we will create a campaign called `hello`.
 
-Create a directory called `campaigns/hello` and add three files in it:
+Create a directory structure like this:
 
 ```
-campaigns/hello/contacts.json
-campaigns/hello/email.json
-campaigns/hello/message.md
+mailus
+├── campaigns
+│   └── hello.json
+├── lists
+│   └── test.json
+├── messages
+│   └── hello.md
+└── servers
+    └── test.json
 ```
 
-- The `contacts.json` file contains the contacts your will send your email to.
-- The `email.json` file contains from and subject fields.
-- The `message.md` file is the content of the email that you are going to send.
+- The `campaigns/hello.json` file contains subject, from and message reference.
+- The `lists/test.json` file contains a list of contacts your will send your email to.
+- The `messages/hello.md` file is the content of the email that you are going to send.
+- The `servers/test.json` file contains the server you are sending emails through.
 
-#### Add your contacts
+### Construct your email
 
-The `contacts.json` file has to be an array of items containing a field named `email` and can have any other data your want to use in your email:
+In the `campaigns/hello.json` file add from, subject and message reference:
+```json
+{
+  "from": "Vidar Eldøy <vidar@eldoy.com>",
+  "subject": "Hey, what's going on?",
+  "message": "hello"
+}
+```
+
+The message reference should be the same name as one of the messages in the `messages` directory, here it is referencing `messages/hello.md`.
+
+#### Add list of contacts
+
+The `lists/test.json` file has to be an array of contacts containing a field named `email`, and can have any other data your want to use in your email:
 
 ```json
 [
@@ -39,19 +59,9 @@ The `contacts.json` file has to be an array of items containing a field named `e
 ]
 ```
 
-### Desribe your email
+#### Compose your message
 
-In the `email.json` file add from and subject:
-```json
-{
-  "from": "Vidar Eldøy <vidar@eldoy.com>",
-  "subject": "Hey, what's going on?"
-}
-```
-
-#### Write your message
-
-The message in `message.md` is written in markdown, but also supports HTML and Mustache with front matter data:
+The message in `messages/hello.md` is written in markdown, but also supports HTML and Mustache with front matter data:
 
 ```md
 # Hello {{name}}
@@ -62,54 +72,35 @@ Best regards
 \- Vidar
 ```
 
-### Config
+### Add a server to send through
 
-In your root directory, add a file called `mailus.json`. It is your configuration file for mailus.
+In `servers/test.json` add server info like this:
 
 ```json
-{
-  "from": "Vidar Eldøy <vidar@eldoy.com>",
-  "server": {
-    "host": "smtp.ethereal.email",
-    "port": 587,
-    "auth": {
-      "user": "nicola.breitenberg58@ethereal.email",
-      "pass": "eUpHSnV96EM8uRbJ9S"
-    }
-  }
+{    
+  "host": "smtp.ethereal.email",
+  "port": 587,
+  "auth": {
+    "user": "nicola.breitenberg58@ethereal.email",
+    "pass": "eUpHSnV96EM8uRbJ9S"
+  }  
 }
 ```
 
-### Test your email
-
-To add a test configuration, create a file called `mailus.test.json`. It will be loaded instead of the normal config file if you run the `test` command.
-
-Also add a test contacts file in `campaigns/hello/contacts.test.json`:
-
-```json
-[
-  {
-    "name": "Vidar",
-    "email": "Vidar Eldøy <vidar@eldoy.com>"
-  }
-]
-```
-
-To test your email write this in terminal:
-
-```
-mailus test hello
-```
-
-It will send an email to your test contacts using the config from your test config file.
-
+The server info can be any outgoing SMTP server. Here we use a test server that doesn't actually send any emails.
 
 ### Send your emails
 
-To start sending mails to all of your contacts, write this in terminal:
+To start sending mails to all of your contacts in your list, write this in terminal:
 
 ```
-mailus send hello
+mailus test hello test
+```
+
+This means "send the test email to the hello list through the test server":
+
+```
+mailus <campaign> <list> <server>
 ```
 
 ### License

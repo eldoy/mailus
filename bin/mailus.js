@@ -1,25 +1,30 @@
 #!/usr/bin/env node
-const COMMANDS = ['test', 'send']
-const command = process.argv[2]
+const campaignName = process.argv[2]
+const listName = process.argv[3]
+const serverName = process.argv[4]
 
-function usage() {
+function usage(msg) {
+  console.log(`\n${msg}`)
   console.log(
     [
       '\nUsage:',
-      '  send - mailus send <campaign-name>',
-      '  test - mailus test <campaign-name>\n'
+      '  mailus <campaign> <list> <server>\n'      
     ].join('\n')
   )
-}
-
-if (!COMMANDS.includes(command)) {
-  console.log(`\nUnknown command: ${command}`)
-  usage()
   process.exit()
 }
 
-const campaign = process.argv[3]
+if (!campaignName) {  
+  usage(`Campaign name missing!`)  
+}
+
+if (!listName) {  
+  usage(`List name missing!`)  
+}
+
+if (!serverName) {  
+  usage(`Server name missing!`)  
+}
 
 const mailus = require('../index.js')
-
-mailus({ command, campaign })
+mailus({ campaignName, listName, serverName })

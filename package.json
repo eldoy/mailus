@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/eldoy/mailus#readme",
   "dependencies": {
-    "extras": "^0.11.0",
+    "conficurse": "^0.3.6",
     "waveorb-mailer": "^0.2.1"
   }
 }
